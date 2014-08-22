@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		182A8DB419410CBE001EE048 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 182A8DB319410CBE001EE048 /* CloudKit.framework */; };
 		9245BECA193FEF11006664EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEC9193FEF11006664EA /* AppDelegate.swift */; };
 		9245BECC193FEF11006664EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BECB193FEF11006664EA /* ViewController.swift */; };
 		9245BECF193FEF11006664EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9245BECD193FEF11006664EA /* Main.storyboard */; };
 		9245BED1193FEF11006664EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9245BED0193FEF11006664EA /* Images.xcassets */; };
 		9245BEDD193FEF12006664EA /* ToDoCloudKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEDC193FEF12006664EA /* ToDoCloudKitTests.swift */; };
-		9245BEEC193FEF8B006664EA /* ASGTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEEA193FEF8B006664EA /* ASGTableViewController.swift */; };
-		9245BEED193FEF8B006664EA /* ASGTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9245BEEB193FEF8B006664EA /* ASGTableViewController.xib */; };
-		9245BEF2193FEFAE006664EA /* ASGNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEF0193FEFAE006664EA /* ASGNewTaskViewController.swift */; };
-		9245BEF3193FEFAE006664EA /* ASGNewTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9245BEF1193FEFAE006664EA /* ASGNewTaskViewController.xib */; };
+		9245BEEC193FEF8B006664EA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEEA193FEF8B006664EA /* TableViewController.swift */; };
+		9245BEF2193FEFAE006664EA /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEF0193FEFAE006664EA /* NewTaskViewController.swift */; };
+		B59CA01D19A5B22500207DC8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B59CA01C19A5B22500207DC8 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +28,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		182A8DB319410CBE001EE048 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9245BEC4193FEF11006664EA /* ToDoCloudKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoCloudKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9245BEC8193FEF11006664EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9245BEC9193FEF11006664EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,10 +38,9 @@
 		9245BEDB193FEF12006664EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9245BEDC193FEF12006664EA /* ToDoCloudKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCloudKitTests.swift; sourceTree = "<group>"; };
 		9245BEE6193FEF1E006664EA /* ToDoCloudKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ToDoCloudKit.entitlements; sourceTree = "<group>"; };
-		9245BEEA193FEF8B006664EA /* ASGTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASGTableViewController.swift; sourceTree = "<group>"; };
-		9245BEEB193FEF8B006664EA /* ASGTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASGTableViewController.xib; sourceTree = "<group>"; };
-		9245BEF0193FEFAE006664EA /* ASGNewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASGNewTaskViewController.swift; sourceTree = "<group>"; };
-		9245BEF1193FEFAE006664EA /* ASGNewTaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASGNewTaskViewController.xib; sourceTree = "<group>"; };
+		9245BEEA193FEF8B006664EA /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		9245BEF0193FEFAE006664EA /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		B59CA01C19A5B22500207DC8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				182A8DB419410CBE001EE048 /* CloudKit.framework in Frameworks */,
+				B59CA01D19A5B22500207DC8 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,8 +65,10 @@
 		9245BEBB193FEF11006664EA = {
 			isa = PBXGroup;
 			children = (
-				182A8DB319410CBE001EE048 /* CloudKit.framework */,
+				9245BECD193FEF11006664EA /* Main.storyboard */,
 				9245BEC6193FEF11006664EA /* ToDoCloudKit */,
+				9245BEC7193FEF11006664EA /* Supporting Files */,
+				B59CA01C19A5B22500207DC8 /* CloudKit.framework */,
 				9245BED9193FEF12006664EA /* ToDoCloudKitTests */,
 				9245BEC5193FEF11006664EA /* Products */,
 			);
@@ -88,16 +86,10 @@
 		9245BEC6193FEF11006664EA /* ToDoCloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				9245BEE6193FEF1E006664EA /* ToDoCloudKit.entitlements */,
 				9245BEC9193FEF11006664EA /* AppDelegate.swift */,
 				9245BECB193FEF11006664EA /* ViewController.swift */,
-				9245BECD193FEF11006664EA /* Main.storyboard */,
-				9245BED0193FEF11006664EA /* Images.xcassets */,
-				9245BEC7193FEF11006664EA /* Supporting Files */,
-				9245BEEA193FEF8B006664EA /* ASGTableViewController.swift */,
-				9245BEEB193FEF8B006664EA /* ASGTableViewController.xib */,
-				9245BEF0193FEFAE006664EA /* ASGNewTaskViewController.swift */,
-				9245BEF1193FEFAE006664EA /* ASGNewTaskViewController.xib */,
+				9245BEEA193FEF8B006664EA /* TableViewController.swift */,
+				9245BEF0193FEFAE006664EA /* NewTaskViewController.swift */,
 			);
 			path = ToDoCloudKit;
 			sourceTree = "<group>";
@@ -105,9 +97,12 @@
 		9245BEC7193FEF11006664EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9245BED0193FEF11006664EA /* Images.xcassets */,
+				9245BEE6193FEF1E006664EA /* ToDoCloudKit.entitlements */,
 				9245BEC8193FEF11006664EA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = ToDoCloudKit;
 			sourceTree = "<group>";
 		};
 		9245BED9193FEF12006664EA /* ToDoCloudKitTests */ = {
@@ -176,7 +171,7 @@
 				TargetAttributes = {
 					9245BEC3193FEF11006664EA = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 4S63QBNHHN;
+						DevelopmentTeam = GYV9U8338K;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -213,9 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9245BEF3193FEFAE006664EA /* ASGNewTaskViewController.xib in Resources */,
 				9245BECF193FEF11006664EA /* Main.storyboard in Resources */,
-				9245BEED193FEF8B006664EA /* ASGTableViewController.xib in Resources */,
 				9245BED1193FEF11006664EA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,8 +228,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9245BECC193FEF11006664EA /* ViewController.swift in Sources */,
-				9245BEF2193FEFAE006664EA /* ASGNewTaskViewController.swift in Sources */,
-				9245BEEC193FEF8B006664EA /* ASGTableViewController.swift in Sources */,
+				9245BEF2193FEFAE006664EA /* NewTaskViewController.swift in Sources */,
+				9245BEEC193FEF8B006664EA /* TableViewController.swift in Sources */,
 				9245BECA193FEF11006664EA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +259,7 @@
 				9245BECE193FEF11006664EA /* Base */,
 			);
 			name = Main.storyboard;
+			path = ToDoCloudKit;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
