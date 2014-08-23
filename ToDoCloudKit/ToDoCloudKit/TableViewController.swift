@@ -8,7 +8,6 @@
 
 import UIKit
 import CloudKit
-import Foundation
 
 
 class TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
@@ -18,23 +17,18 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 
 	// Function to load all tasks in the UITableView and database
 	func loadTasks() {
-
 		// Create the query to load the tasks
 		var query = CKQuery(recordType: "task", predicate: NSPredicate(format: "TRUEPREDICATE"))
 		var queryOperation = CKQueryOperation(query: query)
 
 		println("Start fetch")
 
-		// Add the newly fetched record to our records array
-		func fetched(record: CKRecord!) {
-			records.append(record)
+		queryOperation.recordFetchedBlock = { (record: CKRecord!) in
+			self.records.append(record)
 		}
-
-		queryOperation.recordFetchedBlock = fetched
 
 		// Finish fetching the items for the recordX
 		func fetchFinished(cursor: CKQueryCursor?, error: NSError?) {
-
 			if error != nil {
 				println(error)
 			}
@@ -66,22 +60,17 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 
 	// Function to delete all tasks in the UITableView and database
 	@IBAction func deleteTasks(sender: AnyObject) {
-
 		// Create the query to load the tasks
 		var query = CKQuery(recordType: "task", predicate: NSPredicate(format: "TRUEPREDICATE"))
 		var queryOperation = CKQueryOperation(query: query)
 		println("Start fetch")
 
-		// Fetch the items for the record
-		func fetched(record: CKRecord!) {
-			records.append(record)
+		queryOperation.recordFetchedBlock = { (record: CKRecord!) in
+			self.records.append(record)
 		}
-
-		queryOperation.recordFetchedBlock = fetched
 
 		// Finish fetching the items for the record
 		func fetchFinished(cursor: CKQueryCursor?, error: NSError?) {
-
 			if error != nil {
 				println(error)
 			}
@@ -130,13 +119,13 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 
 		var database: CKDatabase = CKContainer.defaultContainer().privateCloudDatabase
 
-		database.deleteRecordWithID(itemToDelete.recordID, completionHandler: { (deletedRecord, error) -> Void in
+		database.deleteRecordWithID(itemToDelete.recordID) { (deletedRecord, error) -> Void in
 			if error != nil {
 				println("error: \(error)")
 			} else {
 				println("deleted task: \(itemToDelete.name)")
 			}
-		})
+		}
 	}
 
 	override func viewDidAppear(animated: Bool)  {
@@ -168,6 +157,4 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
-
-
 }

@@ -20,6 +20,7 @@ class NewTaskViewController: UIViewController {
 
 	var todoVC: TableViewController = TableViewController()
 
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
@@ -41,8 +42,8 @@ class NewTaskViewController: UIViewController {
 		// Create the private database for the user to save their data to
 		var database: CKDatabase = CKContainer.defaultContainer().privateCloudDatabase
 
-		// Save the data to the database for the record: task
-		func recordSaved(record: CKRecord?, error: NSError?) {
+		// Save data to the database for the record: task
+		database.saveRecord(record) { (record: CKRecord?, error: NSError?) in
 			if error != nil {
 				// handle it
 				println(error)
@@ -55,15 +56,11 @@ class NewTaskViewController: UIViewController {
 			}
 		}
 
-		// Save data to the database for the record: task
-		database.saveRecord(record, completionHandler: recordSaved)
-
 		navigationController.popViewControllerAnimated(true)
 	}
 
 	// Create the button to set the priority
 	@IBAction func addFlagButtonPressed(sender: AnyObject) {
-
 		// Detect wether the UISwitch is on or off
 		if(flagButton.on) {
 			priorityLabel.text = "Important"
