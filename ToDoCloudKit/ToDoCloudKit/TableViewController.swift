@@ -10,12 +10,11 @@ import UIKit
 import CloudKit
 import Foundation
 
-class TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
-	// Crete an array to store the tasks
-	var tasks: NSMutableArray = NSMutableArray()
+class TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 	// Create a CKRecord for the items in our database we will be retreiving and storing
-	var items: [CKRecord] = []
+	var records: [CKRecord] = []
+	var todoStore = TodoStore.sharedStore
 
 	// Function to load all tasks in the UITableView and database
 	func loadTasks() {
@@ -26,9 +25,9 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 
 		println("Start fetch")
 
-		// Fetch the items for the record
+		// Add the newly fetched record to our records array
 		func fetched(record: CKRecord!) {
-			items.append(record)
+			records.append(record)
 		}
 
 		queryOperation.recordFetchedBlock = fetched
@@ -43,15 +42,20 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 			println("End fetch")
 
 			// Print items array contents
-			println(items)
+			println(records)
 
 			// Add contents of the item array to the tasks array
-			tasks.addObjectsFromArray(items)
+			for record in self.records {
+				todoStore.createOrUpdateTodoForRecord(record)
+			}
+
+			records = []
 
 			// Reload the UITableView with the retreived contents
-			self.tableView.reloadData()
+			dispatch_async(dispatch_get_main_queue()) {
+				self.tableView.reloadData()
+			}
 		}
-
 
 		queryOperation.queryCompletionBlock = fetchFinished
 
@@ -61,7 +65,7 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 	}
 
 	// Function to delete all tasks in the UITableView and database
-	func deleteTasks() {
+	@IBAction func deleteTasks(sender: AnyObject) {
 
 		// Create the query to load the tasks
 		var query = CKQuery(recordType: "task", predicate: NSPredicate(format: "TRUEPREDICATE"))
@@ -70,7 +74,7 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 
 		// Fetch the items for the record
 		func fetched(record: CKRecord!) {
-			items.append(record)
+			records.append(record)
 		}
 
 		queryOperation.recordFetchedBlock = fetched
@@ -85,24 +89,32 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 			println("End fetch")
 
 			// Print items array contents
-			println(items)
+			println(records)
 
 			// Iterate through the array content ids
 			var ids : [CKRecordID] = []
-			for i in items {
-				ids.append(i.recordID)
+			for item in records {
+				ids.append(item.recordID)
 			}
 
 			// Create the database where you will delete your data from
 			var database: CKDatabase = CKContainer.defaultContainer().privateCloudDatabase
 
 			// Delete the data from the database using the ids we iterated through
-			var clear: CKModifyRecordsOperation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: ids)
-			database.addOperation(clear)
+			var deleteItemsOperation: CKModifyRecordsOperation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: ids)
 
-			// Reload the UITableView and retreive the new contents
-			self.tableView.reloadData()
+			deleteItemsOperation.modifyRecordsCompletionBlock = { (savedRecords, deletedRecordIDs, operationError) -> Void in
+				if deletedRecordIDs.count > 0 {
+					self.todoStore.todos = []
+				}
 
+				// Reload the UITableView and retreive the new contents
+				dispatch_async(dispatch_get_main_queue()) {
+					self.tableView.reloadData()
+				}
+			}
+
+			database.addOperation(deleteItemsOperation)
 		}
 
 		queryOperation.queryCompletionBlock = fetchFinished
@@ -112,11 +124,25 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 		database.addOperation(queryOperation)
 	}
 
+	func deleteTodoAtIndexPath(indexPath: NSIndexPath) {
+		var itemToDelete = todoStore.todos.removeAtIndex(indexPath.row)
+		tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
+		var database: CKDatabase = CKContainer.defaultContainer().privateCloudDatabase
+
+		database.deleteRecordWithID(itemToDelete.recordID, completionHandler: { (deletedRecord, error) -> Void in
+			if error != nil {
+				println("error: \(error)")
+			} else {
+				println("deleted task: \(itemToDelete.name)")
+			}
+		})
+	}
+
 	override func viewDidAppear(animated: Bool)  {
 		super.viewDidAppear(animated)
 
 		loadTasks()
-		self.tableView.reloadData()
 	}
 
 	override func viewDidLoad() {
@@ -125,27 +151,10 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 
-//		// Create an add button that helps you create a new task
-//		var addButton: UIBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewTaskViewController"))
-//		// Create a delete button that helps you delete all items in your database for a particular record
-//		var deleteButton: UIBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Plain, target: self, action:Selector("deleteTasks"))
-
-//		// Set the navigationItem title
-//		navigationItem.title = "To Do List"
-//		// Set the add button on the right side of the UINavigationBar
-//		navigationItem.rightBarButtonItem = addButton
-//		// Set the delete button on the left side of the UINavigationBar
-//		navigationItem.leftBarButtonItem = deleteButton
-
-		self.tableView.reloadData()
+		dispatch_async(dispatch_get_main_queue()) {
+			self.tableView.reloadData()
+		}
 	}
-
-	// Function to switch to the new task view
-	//func showNewTaskViewController() {
-	//    var newTaskVC: NewTaskViewController = NewTaskViewController(nibName: nil, bundle: nil)
-	//    newTaskVC.todoVC = self
-	//    navigationController.pushViewController(newTaskVC, animated: true)
-	//}
 
 	override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
 		super.prepareForSegue(segue, sender: sender)
@@ -160,47 +169,5 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 		// Dispose of any resources that can be recreated.
 	}
 
-	override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
-		// Return the number of sections.
-		return 1
-	}
-
-	override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
-		// Return the number of rows in the section.
-		return tasks.count
-	}
-
-
-	override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell? {
-		let cellIdentifier = "taskCell"
-
-		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: cellIdentifier)
-		println(tasks)
-		var task: CKRecord = tasks[indexPath.row] as CKRecord
-
-		// Set the main cell label for the key we retreived: taskKey. This can be optional.
-		if let text = task.objectForKey("taskKey") as? String {
-			cell.textLabel.text = text
-		}
-
-		// Set the detail cell label for the key we retreived: priorityKey. This can be optional.
-		if let detail = task.objectForKey("priorityKey") as? String {
-			cell.detailTextLabel.text = detail
-		}
-
-		return cell as UITableViewCell
-	}
-
-	override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-
-		// Deselect the row using an animation.
-		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-		// Reload the row using an animation.
-		tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-
-		// TODO: Implement done
-
-	}
 
 }

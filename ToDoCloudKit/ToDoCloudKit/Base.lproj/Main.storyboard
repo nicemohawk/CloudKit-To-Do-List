@@ -19,7 +19,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="L3y-rY-1Ur">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="cVO-wJ-65q"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="cVO-wJ-65q">
+                            <connections>
+                                <action selector="deleteTasks:" destination="69S-uv-TpM" id="3Ia-V9-AAI"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="p2c-Qq-rI9">
                             <connections>
                                 <segue destination="hMp-FM-yBL" kind="show" id="A9z-mK-0R2"/>

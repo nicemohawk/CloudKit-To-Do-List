@@ -31,7 +31,7 @@ class NewTaskViewController: UIViewController {
 	}
 
 	// Create the button to add the task
-	@IBAction func addTaskButtonPressed(sender : AnyObject) {
+	@IBAction func addTaskButtonPressed(sender: AnyObject) {
 		// Create record to save tasks
 		var record: CKRecord = CKRecord(recordType: "task")
 		// Save task description for key: taskKey
@@ -46,6 +46,12 @@ class NewTaskViewController: UIViewController {
 			if error != nil {
 				// handle it
 				println(error)
+			} else {
+				TodoStore.sharedStore.createOrUpdateTodoForRecord(record!)
+			}
+
+			dispatch_async(dispatch_get_main_queue()) {
+				self.todoVC.tableView.reloadData()
 			}
 		}
 

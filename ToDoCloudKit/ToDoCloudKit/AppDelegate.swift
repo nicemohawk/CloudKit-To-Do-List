@@ -1,4 +1,4 @@
-	//
+//
 //  AppDelegate.swift
 //  ToDoCloudKit
 //
@@ -9,20 +9,12 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-                            
-    var window: UIWindow?
 
+class AppDelegate: UIResponder, UIApplicationDelegate {                            
+    var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
-        
-		//       var todoTableVC: TableViewController = TableViewController(style: .Plain)
-		//        var navigationController: UINavigationController = UINavigationController(rootViewController: todoTableVC)
-        
-        
-		//       self.window!.rootViewController = navigationController
-
         
         return true
     }
