@@ -3,7 +3,7 @@
 //  ToDoCloudKit
 //
 //  Created by Ben Lachman on 8/22/14.
-//  Copyright (c) 2014 Anthony Geranio. All rights reserved.
+//  Copyright (c) 2014 Ben Lachman. All rights reserved.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ extension TableViewController {
 		let cellIdentifier = "todoCell"
 
 		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: cellIdentifier)
-//		println(todoStore.todos)
+
 		var todo = todoStore.todos[indexPath.row]
 
 		// Set the main cell label for the key we retreived: taskKey. This can be optional.
@@ -36,7 +36,6 @@ extension TableViewController {
 	}
 
 	override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-
 		// Deselect the row using an animation.
 		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
 

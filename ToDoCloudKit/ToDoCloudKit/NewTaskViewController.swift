@@ -18,7 +18,7 @@ class NewTaskViewController: UIViewController {
 	// UISwitch for priority. Can be either 'Off' or 'On'. This also changes the priority label accordingly.
 	@IBOutlet var flagButton: UISwitch!
 
-	var todoVC: TableViewController = TableViewController()
+	var todoViewController: TableViewController = TableViewController()
 
 	
 	override func viewDidLoad() {
@@ -33,26 +33,10 @@ class NewTaskViewController: UIViewController {
 
 	// Create the button to add the task
 	@IBAction func addTaskButtonPressed(sender: AnyObject) {
-		// Create record to save tasks
-		var record: CKRecord = CKRecord(recordType: "task")
-		// Save task description for key: taskKey
-		record.setObject(self.taskDescriptionTextField.text, forKey: "taskKey")
-		// Save priority for key: priorityKey
-		record.setObject(self.priorityLabel.text, forKey: "priorityKey")
-		// Create the private database for the user to save their data to
-		var database: CKDatabase = CKContainer.defaultContainer().privateCloudDatabase
 
-		// Save data to the database for the record: task
-		database.saveRecord(record) { (record: CKRecord?, error: NSError?) in
-			if error != nil {
-				// handle it
-				println(error)
-			} else {
-				TodoStore.sharedStore.createOrUpdateTodoForRecord(record!)
-			}
-
+		TodoStore.sharedStore.newTodoWithName(taskDescriptionTextField.text, andPriority: priorityLabel.text) {
 			dispatch_async(dispatch_get_main_queue()) {
-				self.todoVC.tableView.reloadData()
+				self.todoViewController.tableView.reloadData()
 			}
 		}
 
