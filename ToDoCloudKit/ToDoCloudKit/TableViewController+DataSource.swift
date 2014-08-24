@@ -26,7 +26,7 @@ extension TableViewController {
 
 		var todo = todoStore.todos[indexPath.row]
 
-		// Set the main cell label for the key we retreived: taskKey. This can be optional.
+		// Set the main cell label for the key we retreived: todoNameKey. This can be optional.
 		cell.textLabel.text = todo.name
 
 		// Set the detail cell label for the key we retreived: priorityKey. This can be optional.
@@ -39,6 +39,6 @@ extension TableViewController {
 		// Deselect the row using an animation.
 		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
-		self.deleteTodoAtIndexPath(indexPath)
+		self.completeTodoAtIndexPath(indexPath)
 	}
 }

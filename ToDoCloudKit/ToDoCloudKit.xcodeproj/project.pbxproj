@@ -12,7 +12,7 @@
 		9245BED1193FEF11006664EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9245BED0193FEF11006664EA /* Images.xcassets */; };
 		9245BEDD193FEF12006664EA /* ToDoCloudKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEDC193FEF12006664EA /* ToDoCloudKitTests.swift */; };
 		9245BEEC193FEF8B006664EA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEEA193FEF8B006664EA /* TableViewController.swift */; };
-		9245BEF2193FEFAE006664EA /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEF0193FEFAE006664EA /* NewTaskViewController.swift */; };
+		9245BEF2193FEFAE006664EA /* NewTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BEF0193FEFAE006664EA /* NewTodoViewController.swift */; };
 		B58A4FE719A8434200015036 /* TodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58A4FE619A8434200015036 /* TodoStore.swift */; };
 		B58A4FE919A8444100015036 /* TableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58A4FE819A8444100015036 /* TableViewController+DataSource.swift */; };
 		B59CA01D19A5B22500207DC8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B59CA01C19A5B22500207DC8 /* CloudKit.framework */; };
@@ -39,7 +39,7 @@
 		9245BEDC193FEF12006664EA /* ToDoCloudKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCloudKitTests.swift; sourceTree = "<group>"; };
 		9245BEE6193FEF1E006664EA /* ToDoCloudKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ToDoCloudKit.entitlements; sourceTree = "<group>"; };
 		9245BEEA193FEF8B006664EA /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		9245BEF0193FEFAE006664EA /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		9245BEF0193FEFAE006664EA /* NewTodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTodoViewController.swift; sourceTree = "<group>"; };
 		B58A4FE619A8434200015036 /* TodoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoStore.swift; sourceTree = "<group>"; };
 		B58A4FE819A8444100015036 /* TableViewController+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableViewController+DataSource.swift"; sourceTree = "<group>"; };
 		B59CA01C19A5B22500207DC8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -91,7 +91,7 @@
 				9245BEC9193FEF11006664EA /* AppDelegate.swift */,
 				9245BEEA193FEF8B006664EA /* TableViewController.swift */,
 				B58A4FE819A8444100015036 /* TableViewController+DataSource.swift */,
-				9245BEF0193FEFAE006664EA /* NewTaskViewController.swift */,
+				9245BEF0193FEFAE006664EA /* NewTodoViewController.swift */,
 				B58A4FE619A8434200015036 /* TodoStore.swift */,
 			);
 			path = ToDoCloudKit;
@@ -232,7 +232,7 @@
 			files = (
 				B58A4FE919A8444100015036 /* TableViewController+DataSource.swift in Sources */,
 				B58A4FE719A8434200015036 /* TodoStore.swift in Sources */,
-				9245BEF2193FEFAE006664EA /* NewTaskViewController.swift in Sources */,
+				9245BEF2193FEFAE006664EA /* NewTodoViewController.swift in Sources */,
 				9245BEEC193FEF8B006664EA /* TableViewController.swift in Sources */,
 				9245BECA193FEF11006664EA /* AppDelegate.swift in Sources */,
 			);

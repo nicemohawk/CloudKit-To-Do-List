@@ -5,7 +5,7 @@
         <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Tasks-->
+        <!--Todos-->
         <scene sceneID="JZO-v3-dui">
             <objects>
                 <tableViewController id="69S-uv-TpM" customClass="TableViewController" customModule="ToDoCloudKit" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,10 +18,10 @@
                             <outlet property="delegate" destination="69S-uv-TpM" id="V3w-jG-fEs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tasks" id="L3y-rY-1Ur">
+                    <navigationItem key="navigationItem" title="Todos" id="L3y-rY-1Ur">
                         <barButtonItem key="leftBarButtonItem" systemItem="trash" id="cVO-wJ-65q">
                             <connections>
-                                <action selector="deleteTasks:" destination="69S-uv-TpM" id="3Ia-V9-AAI"/>
+                                <action selector="deleteTodos:" destination="69S-uv-TpM" id="3Ia-V9-AAI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="p2c-Qq-rI9">
@@ -51,10 +51,10 @@
             </objects>
             <point key="canvasLocation" x="212" y="-358"/>
         </scene>
-        <!--New Task-->
+        <!--New Todo-->
         <scene sceneID="3ET-iQ-4o5">
             <objects>
-                <viewController id="hMp-FM-yBL" customClass="NewTaskViewController" customModule="ToDoCloudKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hMp-FM-yBL" customClass="NewTodoViewController" customModule="ToDoCloudKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tmF-S1-bII"/>
                         <viewControllerLayoutGuide type="bottom" id="VwR-bZ-dAE"/>
@@ -68,7 +68,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l7-ct-8hl">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Todo description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l7-ct-8hl">
                                 <rect key="frame" x="50" y="98" width="125" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -100,27 +100,27 @@
                             <constraint firstItem="cmB-Mc-x1f" firstAttribute="centerY" secondItem="uWU-Ez-k6u" secondAttribute="centerY" id="iPU-Sh-IQG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Task" id="gxQ-sN-1Ye">
+                    <navigationItem key="navigationItem" title="New Todo" id="gxQ-sN-1Ye">
                         <barButtonItem key="rightBarButtonItem" id="GcU-v2-Oz2">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="w6b-i6-4wP">
                                 <rect key="frame" x="523" y="7" width="64" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Task">
+                                <state key="normal" title="Add Todo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addTaskButtonPressed:" destination="hMp-FM-yBL" eventType="touchUpInside" id="gJa-Sc-hAL"/>
+                                    <action selector="addTodoButtonPressed:" destination="hMp-FM-yBL" eventType="touchUpInside" id="gJa-Sc-hAL"/>
                                 </connections>
                             </button>
                             <connections>
-                                <action selector="addTaskButtonPressed:" destination="hMp-FM-yBL" id="zBt-B5-TYT"/>
+                                <action selector="addTodoButtonPressed:" destination="hMp-FM-yBL" id="zBt-B5-TYT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="flagButton" destination="uWU-Ez-k6u" id="ZgA-zd-enK"/>
                         <outlet property="priorityLabel" destination="cmB-Mc-x1f" id="NVg-gp-bwJ"/>
-                        <outlet property="taskDescriptionTextField" destination="pKl-Ha-fuN" id="TEc-tb-dv1"/>
+                        <outlet property="todoDescriptionTextField" destination="pKl-Ha-fuN" id="TEc-tb-dv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kaj-3K-UA0" userLabel="First Responder" sceneMemberID="firstResponder"/>

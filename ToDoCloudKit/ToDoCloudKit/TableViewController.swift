@@ -14,15 +14,13 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 	// Create a CKRecord for the items in our database we will be retreiving and storing
 	var todoStore = TodoStore.sharedStore
 
-	// Function to load all tasks in the UITableView and database
-	func loadTasks() {
+	// Function to load all todos in the UITableView and database
+	func loadTodos() {
 		// Finish fetching the items for the recordX
 		todoStore.fetchAllRecordsWithCompletion() { (cursor, error) in
 			if error != nil {
 				println(error)
 			}
-
-			println("End fetch")
 
 			// Reload the UITableView with the retreived contents
 			dispatch_async(dispatch_get_main_queue()) {
@@ -31,9 +29,9 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 		}
 	}
 
-	// Function to delete all tasks in the UITableView and database
-	@IBAction func deleteTasks(sender: AnyObject) {
-		// Create the query to load the tasks
+	// Function to delete all todos in the UITableView and database
+	@IBAction func deleteTodos(sender: AnyObject) {
+		// Create the query to load the todos
 
 		todoStore.deleteAllRecordsWithCompletion { (error) -> Void in
 			// Reload the UITableView and retreive the new contents
@@ -43,7 +41,8 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 		}
 	}
 
-	func deleteTodoAtIndexPath(indexPath: NSIndexPath) {
+	func completeTodoAtIndexPath(indexPath: NSIndexPath) {
+		// completing a Todo just deletes it.
 		var itemToDelete = todoStore.todos.removeAtIndex(indexPath.row)
 		tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
@@ -53,7 +52,7 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 			if error != nil {
 				println("error: \(error)")
 			} else {
-				println("deleted task: \(itemToDelete.name)")
+				println("deleted todo: \(itemToDelete.name)")
 			}
 		}
 	}
@@ -61,7 +60,7 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 	override func viewDidAppear(animated: Bool)  {
 		super.viewDidAppear(animated)
 
-		loadTasks()
+		loadTodos()
 	}
 
 	override func viewDidLoad() {
@@ -78,8 +77,8 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 	override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
 		super.prepareForSegue(segue, sender: sender)
 
-		if let newTaskViewController = segue.destinationViewController as? NewTaskViewController {
-			newTaskViewController.todoViewController = self
+		if let newTodoViewController = segue.destinationViewController as? NewTodoViewController {
+			newTodoViewController.todoViewController = self
 		}
 	}
 }

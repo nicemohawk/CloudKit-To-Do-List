@@ -15,7 +15,7 @@ struct Todo {
 	var priority = "Not Important"
 
 	init(record: CKRecord) {
-		self.name = record.objectForKey("taskKey") as String
+		self.name = record.objectForKey("todoNameKey") as String
 		self.priority = record.objectForKey("priorityKey") as String
 
 		self.recordID = record.recordID
@@ -32,9 +32,8 @@ class TodoStore {
 	}
 
 	func fetchAllRecordsWithCompletion(fetchFinished:((CKQueryCursor!, NSError!) -> Void)!) {
-		var query = CKQuery(recordType: "task", predicate: NSPredicate(format: "TRUEPREDICATE"))
+		var query = CKQuery(recordType: "todo", predicate: NSPredicate(format: "TRUEPREDICATE"))
 		var queryOperation = CKQueryOperation(query: query)
-		println("Start fetch")
 
 		queryOperation.recordFetchedBlock = { (record: CKRecord!) in
 			self.createOrUpdateTodoForRecord(record)
@@ -52,8 +51,6 @@ class TodoStore {
 			if error != nil {
 				println(error)
 			}
-
-			println("End fetch")
 
 			// Iterate through the array content ids
 			var ids : [CKRecordID] = []
@@ -83,16 +80,16 @@ class TodoStore {
 	}
 
 	func newTodoWithName(name: String, andPriority priority: String, completion: (Void -> Void)) {
-		// Create record to save tasks
-		var record: CKRecord = CKRecord(recordType: "task")
-		// Save task description for key: taskKey
-		record.setObject(name, forKey: "taskKey")
+		// Create record to save todos
+		var record: CKRecord = CKRecord(recordType: "todo")
+		// Save todo description for key: todoNameKey
+		record.setObject(name, forKey: "todoNameKey")
 		// Save priority for key: priorityKey
 		record.setObject(priority, forKey: "priorityKey")
 		// Create the private database for the user to save their data to
 		var database: CKDatabase = CKContainer.defaultContainer().privateCloudDatabase
 
-		// Save data to the database for the record: task
+		// Save data to the database for the record: todo
 		database.saveRecord(record) { (record: CKRecord?, error: NSError?) in
 			if error != nil {
 				println(error)
@@ -107,11 +104,13 @@ class TodoStore {
 	func createOrUpdateTodoForRecord(record: CKRecord) {
 		var foundTodo: Bool = false
 
-		for todo in todos {
+		for (index, todo) in enumerate(todos) {
 			if todo.recordID == record.recordID {
-				// TODO: update todo
-
 				foundTodo = true
+
+				self.todos[index].name = record.objectForKey("todoNameKey") as String
+				self.todos[index].priority = record.objectForKey("priorityKey") as String
+
 				break;
 			}
 		}
