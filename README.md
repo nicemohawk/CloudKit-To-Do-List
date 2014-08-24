@@ -1,4 +1,4 @@
-# Hello, this is a ToDo List App that is written in Swift and uses CloudKit.
+# Hello, this is a simple ToDo List App that is written in Swift and uses CloudKit.
 
 ----
 ## What is CloudKit?
@@ -10,27 +10,26 @@ See [Cloud Kit Framework Reference](https://developer.apple.com/library/prerelea
 ## Usage
 1. Go to General and sign your application.
 2. Go to Capabilities and add iCloud + CloudKit to your application.
-3. Make sure that you have an iCloud account active in your simulator.
+3. Make sure that you have an iCloud account active in your simulator. (*it is easiest to use an iCloud account that is associated with the developer id you use to log into CloudKit dashboard*)
 
 ----
 ## Quick Reference
 
-> Fetch all tasks
+> Fetch all todos
     
-    loadTasks()
+    loadTodos()
 
-> Delete all tasks
+> Delete all todos
     
-    deleteTasks() 
+    deleteTodos() 
 
-> Add a task with a priority
-   
-    recordSaved()
-
+> Complete a Todo (and delete)
+    
+    completeTodoAtIndexPath(indexPath)
 
 ----
 ## Contact
-[Twitter](https://twitter.com/asg) - Follow me on Twitter.
+[Twitter](https://twitter.com/blach) - Follow me on Twitter.
 
 ## License
 
