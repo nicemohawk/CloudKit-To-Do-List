@@ -26,10 +26,7 @@ extension TableViewController {
 
 		var todo = todoStore.todos[indexPath.row]
 
-		// Set the main cell label for the key we retreived: todoNameKey. This can be optional.
 		cell.textLabel.text = todo.name
-
-		// Set the detail cell label for the key we retreived: priorityKey. This can be optional.
 		cell.detailTextLabel.text = todo.priority
 
 		return cell

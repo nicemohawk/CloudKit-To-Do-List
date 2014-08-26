@@ -14,6 +14,18 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 	// Create a CKRecord for the items in our database we will be retreiving and storing
 	var todoStore = TodoStore.sharedStore
 
+	// Function to delete all todos in the UITableView and database
+	@IBAction func deleteTodos(sender: AnyObject) {
+		// Create the query to load the todos
+
+		todoStore.deleteAllRecordsWithCompletion { (error) -> Void in
+			// Reload the UITableView and retreive the new contents
+			dispatch_async(dispatch_get_main_queue()) {
+				self.tableView.reloadData()
+			}
+		}
+	}
+	
 	// Function to load all todos in the UITableView and database
 	func loadTodos() {
 		// Finish fetching the items for the recordX
@@ -23,18 +35,6 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 			}
 
 			// Reload the UITableView with the retreived contents
-			dispatch_async(dispatch_get_main_queue()) {
-				self.tableView.reloadData()
-			}
-		}
-	}
-
-	// Function to delete all todos in the UITableView and database
-	@IBAction func deleteTodos(sender: AnyObject) {
-		// Create the query to load the todos
-
-		todoStore.deleteAllRecordsWithCompletion { (error) -> Void in
-			// Reload the UITableView and retreive the new contents
 			dispatch_async(dispatch_get_main_queue()) {
 				self.tableView.reloadData()
 			}
@@ -56,6 +56,8 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
 			}
 		}
 	}
+
+	// MARK: UIViewController
 
 	override func viewDidAppear(animated: Bool)  {
 		super.viewDidAppear(animated)
